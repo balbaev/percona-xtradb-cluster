@@ -355,9 +355,9 @@ void Wsrep_server_service::log_state_change(
          Wsrep_server_state::instance().wait_until_state(Wsrep_server_state::s_synced)
          Such a call is unblocked by current context, just after returning
          from this method, so we've got the situation when a client would need
-         to a) wait on wait_until_state() but that unblocks only after
-         signalling the DEBUG_SYNC and b) signal this debug sync after the wait,
-         which situations are mutually exclusive.
+         to a) wait on wait_until_state() but that unbocks only after signalling
+         the DEBUG_SYNC and b) signal this debug sync after the wait, which
+         situations are mutually exclusive.
          2. If we blocked here with DEBUG_SYNC's WAIT_FOR signal, there would be
          no way to signal it from user's connection, because we are owning
          wsrep::server_state::mutex_, which in case of wsrep_ready==false is
